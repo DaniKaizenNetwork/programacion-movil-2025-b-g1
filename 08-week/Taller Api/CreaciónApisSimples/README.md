@@ -226,7 +226,7 @@ Se incluye una colección de Postman (`postman_collection.json`) con todas las p
 4. **Configurar la autenticación** en Postman (Bearer Token)
 5. **Probar los endpoints CRUD** de usuarios
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 - **Spring Boot 3.5.6** - Framework principal
 - **Spring Security** - Seguridad y autenticación
@@ -239,7 +239,7 @@ Se incluye una colección de Postman (`postman_collection.json`) con todas las p
 - **Bean Validation** - Validación de datos
 - **Maven** - Gestión de dependencias
 
-## 📝 Estructura de la Base de Datos
+## Estructura de la Base de Datos
 
 ### Tabla: usuarios
 | Campo | Tipo | Descripción |

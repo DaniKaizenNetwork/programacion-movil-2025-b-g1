@@ -215,7 +215,7 @@ Authorization: Bearer <token>
 - Nunca se almacenan en texto plano
 - Se requiere mínimo 6 caracteres
 
-## 🧪 Pruebas con Postman
+## Pruebas con Postman
 
 Se incluye una colección de Postman (`postman_collection.json`) con todas las peticiones necesarias para probar la API. Importa este archivo en Postman para tener acceso a todos los endpoints preconfigurados.
 
@@ -250,7 +250,7 @@ Se incluye una colección de Postman (`postman_collection.json`) con todas las p
 | password | VARCHAR | Contraseña cifrada con BCrypt |
 | fecha_creacion | TIMESTAMP | Fecha de creación (autogenerada) |
 
-## 🚀 Despliegue
+## Despliegue
 
 ### Variables de Entorno Recomendadas:
 ```bash
@@ -275,7 +275,7 @@ EXPOSE 8087
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 ```
 
-## 🤝 Contribución
+## Contribución
 
 1. Fork el proyecto
 2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
@@ -283,17 +283,14 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
-## 📞 Soporte
+## Soporte
 
 Si tienes preguntas o necesitas ayuda, puedes:
 - Abrir un issue en el repositorio
 - Contactar al equipo de desarrollo
 - Revisar la documentación de Swagger en `/swagger-ui.html`
 
----
-
-**¡Disfruta desarrollando con esta API! 🎉**

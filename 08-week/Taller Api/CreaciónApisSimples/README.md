@@ -1,6 +1,6 @@
 # API REST de Gestión de Usuarios
 
-Una API REST completa desarrollada con Spring Boot para la gestión de usuarios, implementando autenticación JWT, cifrado de contraseñas con BCrypt y documentación interactiva con Swagger/OpenAPI.
+Una API desarrollada con Spring Boot para la gestión de usuarios, implementando autenticación JWT, cifrado de contraseñas con BCrypt y documentación.
 
 ## Características
 

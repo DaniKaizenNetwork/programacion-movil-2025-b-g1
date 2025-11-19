@@ -10,14 +10,13 @@
 | `/auth/logout` | POST | Invalida sesión actual. |
 | `/auth/verify` | GET | Valida token en localStorage. |
 | `/recetas` | GET/POST | Listado paginado / crear receta. |
-| `/recetas/{id}` | GET/PUT/DELETE | Detalle, actualizar, eliminar. |
-| `/recetas/{id}/favoritos` | POST/DELETE | Agregar/quitar favorito. |
+| `/recetas/{id}` | GET/PUT | Detalle, actualizar. |
 | `/usuarios/perfil` | GET/PUT | Perfil actual y actualización. |
 | `/usuarios` | GET | Listado para admins (paginado + search). |
 
 ## Módulos Lógicos
 1. **Auth Module** – Manejo de credenciales, creación de tokens, verificación.
-2. **Recipes Module** – CRUD, búsqueda, estadísticas, favoritos.
+2. **Recipes Module** – CRUD, búsqueda, estadísticas.
 3. **Users Module** – Perfil, estadísticas, administración (roles, permisos).
 4. **Media Module** – Recepción de archivos, almacenamiento, generación de URLs.
 

@@ -3,52 +3,65 @@
 ```mermaid
 erDiagram
     USUARIOS ||--o{ RECETAS : "crea"
-    USUARIOS ||--o{ FAVORITOS : "guarda"
+    USUARIOS ||--o{ GUARDADOS : "guarda"
     RECETAS ||--o{ INGREDIENTES : "contiene"
     RECETAS ||--o{ PASOS : "define"
-    RECETAS ||--|| ESTADISTICAS_RECETA : "tiene"
+    RECETAS ||--o{ IMAGENES : "tiene"
 
     USUARIOS {
-      uuid id
-      string email
-      string username
+      uuid user_id PK
+      string email UK
+      string nombre
+      string username UK
       string role
+      text bio
+      string profile_image_url
+      timestamp creado_en
+      timestamp actualizado_en
     }
 
     RECETAS {
-      uuid id
+      uuid recipe_id PK
+      uuid autor_id FK
       string titulo
       text descripcion
-      string imagen_principal_url
-      uuid autor_id
+      enum estado
+      timestamp creado_en
+      timestamp actualizado_en
     }
 
     INGREDIENTES {
-      int id
-      uuid receta_id
-      int orden
+      bigint ingrediente_id PK
+      uuid recipe_id FK
       string nombre
       string cantidad
       string unidad
+      int orden
     }
 
     PASOS {
-      int id
-      uuid receta_id
+      bigint paso_id PK
+      uuid recipe_id FK
       int orden
       text descripcion
     }
 
-    FAVORITOS {
-      uuid usuario_id
-      uuid receta_id
-      datetime created_at
+    IMAGENES {
+      bigint imagen_id PK
+      uuid recipe_id FK
+      string url
+      string storage_key
+      int ancho_px
+      int alto_px
+      int orden
+      boolean es_principal
     }
 
-    ESTADISTICAS_RECETA {
-      uuid receta_id
-      int views
-      int shares
+    GUARDADOS {
+      bigint guardado_id PK
+      uuid user_id FK
+      uuid recipe_id FK
+      timestamp creado_en
     }
 ```
 ```mermaid
@@ -77,8 +90,8 @@ erDiagram
     }
 
     INGREDIENTES {
-        UUID ingrediente_id
-        UUID receta_id
+        bigint ingrediente_id PK
+        uuid recipe_id FK
         string nombre
         string cantidad
         string unidad
@@ -86,29 +99,38 @@ erDiagram
     }
 
     PASOS {
-        UUID paso_id
-        UUID receta_id
+        bigint paso_id PK
+        uuid recipe_id FK
         int orden
         text descripcion
     }
 
     IMAGENES {
-        UUID imagen_id
-        UUID receta_id
-        text url
+        bigint imagen_id PK
+        uuid recipe_id FK
+        string url
+        string storage_key
+        int ancho_px
+        int alto_px
+        int orden
         boolean es_principal
     }
 
     GUARDADOS {
-        UUID guardado_id
-        UUID user_id
-        UUID recipe_id
+        bigint guardado_id PK
+        uuid user_id FK
+        uuid recipe_id FK
+        timestamp creado_en
     }
 ```
 
 ### Notas
-- Todas las claves primarias usan UUID (ver anotaciones `@GeneratedValue(strategy = GenerationType.UUID)` en las entidades).  
-- `Guardados` funciona como tabla puente para representar favoritos (muchos a muchos entre usuarios y recetas).  
-- Columnas `orden` en ingredientes/pasos preservan el orden definido por el autor (ver `@OrderBy("orden ASC")` en `Receta`).  
-- Las imágenes se almacenan como URL + metadatos (`storageKey`, dimensiones) para permitir migrar a almacenamiento externo.*** End Patch
+- **Claves primarias:**
+  - `usuarios.user_id` y `recetas.recipe_id` usan UUID (ver `@GeneratedValue(strategy = GenerationType.UUID)`).
+  - `ingredientes.ingrediente_id`, `pasos.paso_id`, `imagenes.imagen_id` y `guardados.guardado_id` usan BIGINT con auto-incremento (ver `@GeneratedValue(strategy = GenerationType.IDENTITY)`).
+- **Tabla `guardados`:** Funciona como tabla puente para representar favoritos (muchos a muchos entre usuarios y recetas). Tiene constraint único en `(user_id, recipe_id)`.
+- **Orden:** Columnas `orden` en ingredientes/pasos/imágenes preservan el orden definido por el autor (ver `@OrderBy("orden ASC")` en `Receta`).
+- **Imágenes:** Se almacenan en tabla separada `imagenes` con metadatos (`storage_key`, `ancho_px`, `alto_px`, `orden`, `es_principal`) para permitir múltiples imágenes por receta y migrar a almacenamiento externo.
+- **Estados de receta:** `BORRADOR`, `PUBLICADA`, `ELIMINADA` (eliminación lógica).
+- **Estadísticas:** No existe tabla `estadisticas_receta`. Las estadísticas se calculan dinámicamente en el servicio.
 

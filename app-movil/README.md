@@ -13,7 +13,7 @@
 ## Servicios Front-end
 - `authService.js`: login, registro, verificación, logout, headers con token.
 - `userService.js`: perfiles, stats, CRUD de usuarios, cambio de contraseña.
-- `recipeService.js`: listados (paginados, admin), crear/editar/eliminar recetas y convertir formatos backend/frontend.
+- `recipeService.js`: listados (paginados, admin), crear/editar recetas y convertir formatos backend/frontend.
 
 ## Estado y Almacenamiento
 - Tokens y usuario actual se guardan en `localStorage` (`sazon_auth_token`, `sazon_user`).
